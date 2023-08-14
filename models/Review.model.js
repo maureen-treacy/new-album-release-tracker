@@ -1,11 +1,14 @@
 const {Schema, model} = require("mongoose")
 
 const reviewSchema = new Schema({
-    rating: Integer,
+    rating: Number,
     review: String,
     shareWith: String,
-    saveAlbum: Boolean
-})
+    saveAlbum: {
+        type: Boolean,
+        required: false
+    }
+    })
 
 
 const Review = model("Review", reviewSchema);
