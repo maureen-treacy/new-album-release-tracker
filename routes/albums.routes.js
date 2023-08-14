@@ -28,7 +28,7 @@ const Album = require("../models/Album.model.js");
 router.get("/all-new-releases", async (req, res) => {
   try {
     let allNewReleases = await spotifyApi.getNewReleases({
-      limit: 10,
+      limit: 50,
       offset: 0,
       country: "US",
     });
@@ -63,7 +63,7 @@ router.get("/all-new-releases", async (req, res) => {
         })
         };
       });
-      
+
     const databaseAlbums = await Album.find();
     res.render("albums/all-albums", { albums: databaseAlbums });
   } catch (error) {
