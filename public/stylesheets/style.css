@@ -1,4 +1,74 @@
 body {
+  margin: 0;
+}
+
+.div-welcome {
+  min-height: 100vh;
+  display: flex;
+  font-size: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* This elemente added in order to center the h1*/
+  background-image: url("https://i.ibb.co/9qc5QZd/image1.jpg");
+  background-size: cover;
+  background-repeat: none;
+  height: 100vh;
+  color: white;
+}
+
+
+.div-sign {
+  min-height: 100vh;
+  display: flex;
+  font-size: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* This elemente added in order to center the h1*/
+  background-image: url("https://i.ibb.co/Qvfbcr0/sign-up.jpg");
+  background-size: cover;
+  background-repeat: none;
+  height: 100vh;
+  color: white;
+}
+
+
+.div-login {
+  min-height: 100vh;
+  display: flex;
+  font-size: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* This elemente added in order to center the h1*/
+  background-image: url("https://essencial-portugal.com/en/wp-content/uploads/2023/04/Lisbon-2023-Music-Festival.jpg.webp");
+  background-size: cover;
+  background-repeat: none;
+  height: 100vh;
+  color: white;
+}
+
+
+
+/* .div-search-artists input button {
+  padding: 0.5rem 2rem;
+  background-color: rgb(251, 251, 251);
+  border: none;
+  cursor: pointer;
+  color: white;
+} */
+
+.div-auth {
+    padding: 0.5rem 2rem;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    color: purple;      /* Setting the text color to purple */
+    text-decoration: none; /* Removing underline */
+  }
+
+/* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -9,4 +79,4 @@ a {
 
 h1 {
   color: 15px;
-}
+} */
