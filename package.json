@@ -16,7 +16,8 @@
     "hbs": "^4.2.0",
     "mongoose": "^7.4.2",
     "morgan": "^1.10.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

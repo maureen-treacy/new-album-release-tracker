@@ -20,6 +20,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    savedAlbums: [{
+      type: Schema.Types.ObjectId,
+      ref: "Album"
+    }]
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
