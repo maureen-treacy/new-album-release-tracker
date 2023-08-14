@@ -1,9 +1,11 @@
 
+<a href="/saved-albums">My Saved Albums</a>
+
     <div class="div-albums">
         {{#each albums}}
       <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
       <img class="specific-album-img" src={{this.images}} />
-      <a class="specific-album-button" href="/tracks/{{this.spotifyId}}">View Tracks</a> 
+      <a class="specific-album-button" href="/album-details/{{_id}}">View Details</a>
       {{/each}}
     </div>
 
