@@ -115,6 +115,8 @@ router.post("/album-details/save-album/:id", isLoggedIn, async (req, res, next) 
 
 //Remove album from saved albums --> is this considered the delete in CRUD?
 
+
+//NEED TO REVIEW WHAT IS WRONG WHEN REMOVING IDS
 router.post(
   "/album-details/remove-album/:id",
   isLoggedIn,

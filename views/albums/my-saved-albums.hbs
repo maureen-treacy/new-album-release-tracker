@@ -1,0 +1,15 @@
+
+    <div class="div-albums">
+        {{#each savedAlbums}}
+      <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
+      <img class="specific-album-img" src={{this.images}} />
+      <a class="specific-album-button" href="/album-details/{{_id}}">View Details</a>
+
+        <form action="/album-details/remove-album/{{this._id}}" method="post">
+            <button type="submit">Remove Album</button>
+        </form>
+
+      {{/each}}
+    </div>
+
+    <a href="/all-new-releases">Return to All Albums</a>
