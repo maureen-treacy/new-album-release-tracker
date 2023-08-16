@@ -3,7 +3,7 @@
 
 
 #Mistakes
-1. Removing one instance of duplicate entries for saved albums. Pull took out all the instances of a specific album but we only wanted to remove one
+1. With the $push operator, the user could add the same album to their saved albums multiple times. We change this to the $addToSet operator which only allowed it to push if there was no other instances of it 
 
 
 # Project | New Album Tracker

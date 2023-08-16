@@ -21,10 +21,9 @@
   <p>{{details.releaseDate}}</p>
   <p>{{details.totalTracks}}</p>
 
-  <form action="/album-details/save-album/{{details._id}}" method="post">
-    <button type="submit">Save Album</button>
-  </form>
-</div>
+<form action="/album-details/save-album/{{_id}}" method="post">
+  <button type="submit">Save Album</button>
+</form>
 
 <br />
 
@@ -49,6 +48,11 @@
     <h2 class="specific-reviewer">Reviewer: {{this.reviewer.username}}</h2>
     <p class="specific-review-rating">Rating: {{this.rating}}</p>
     <p class="specific-review-review">Review: {{this.review}}</p>
+
+    <!-- Editing the Review NEED TO ADD-->
+    <a href="/review/{{_id}}/edit">Edit Review</a>
+
+
     <!-- Deleting the Review -->
     <form action="/review/{{this._id}}/delete" method="post">
       <button type="submit">Delete</button>
