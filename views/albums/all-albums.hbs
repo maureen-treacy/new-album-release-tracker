@@ -1,13 +1,42 @@
+{{! adding below to layout.hbs
+ <a href="/saved-albums">My Saved Albums</a> }}
 
-<a href="/saved-albums">My Saved Albums</a>
+{{!-- <div class="div-albums">
+  {{#each albums}}
+    <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
+    <img class="specific-album-img" src={{this.images}} />
+    <a class="specific-album-button" href="/album-details/{{_id}}">View Details</a>
+  {{/each}}
+</div> --}}
 
-    <div class="div-albums">
-        {{#each albums}}
-      <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
-      <img class="specific-album-img" src={{this.images}} />
-      <a class="specific-album-button" href="/album-details/{{_id}}">View Details</a>
-      {{/each}}
-    </div>
+<!-- ADD IMAGE HERE-->
+{{! <div class="all-albums-background">  }}
+
+<!-- Navigation Bars -->
+<div class="my-navbar">
+  <a href="/saved-albums">My Saved Albums</a>
+  <a href="/all-new-releases">Return to All Albums</a>
+  <a href="/auth/logout">Logout</a>
+</div>
+
+<div class="container-1">
+  <div class="row">
+    {{#each albums}}
+      <div class="col-3"> </div>
+      <div class="card pt-4 mb-4" style="width: 18rem;">
+
+        <img src={{this.images}} class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{this.albumTitle}}</h5>
+          <p class="card-text"></p>
+          <a href="/album-details/{{_id}}" class="btn btn-primary">Check Details</a>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+{{! </div> }}
 
 {{!-- 
     {{this.images.0.url}}  --}}

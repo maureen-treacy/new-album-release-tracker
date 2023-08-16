@@ -2,6 +2,10 @@
 1. Had to make sure that the database wasnt adding duplicate albums everytime we refreshed the API. For example, when we first built the code, it would bring the Oliva Rodirgo album in each time we refreshed the API. We added a for each look and created a variable before the if statement to check if the album ID already existed before adding the new album.
 
 
+#Mistakes
+1. Removing one instance of duplicate entries for saved albums. Pull took out all the instances of a specific album but we only wanted to remove one
+
+
 # Project | New Album Tracker
 
 

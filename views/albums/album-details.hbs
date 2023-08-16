@@ -1,0 +1,61 @@
+<!-- Navigation Bars -->
+<div class="my-navbar">
+    <a href="/saved-albums">My Saved Albums</a>
+    <a href="/all-new-releases">Return to All Albums</a>
+    <a href="/auth/logout">Logout</a>
+</div>
+
+<div class="div-current-user">
+
+  {{#each currentUser}}
+    <p>Hello, {{username}}! Welcome back.</p>
+  {{/each}}
+
+</div>
+
+<!-- Adding Card -->
+<div class="card" style="width: 18rem;">
+  <img class="specific-album-img" src={{details.images}} />
+  <h2>{{details.albumTitle}}</h2>
+  <p>{{details.artist}}</p>
+  <p>{{details.releaseDate}}</p>
+  <p>{{details.totalTracks}}</p>
+
+  <form action="/album-details/save-album/{{details._id}}" method="post">
+    <button type="submit">Save Album</button>
+  </form>
+</div>
+
+<br />
+
+<form action="/review-album/{{_id}}" method="post">
+  <label>
+    Rate:
+    <input type="number" name="rating" min="1" max="10" />
+  </label>
+
+  <label>
+    Review:
+    <textarea name="review" cols="30" rows="4"></textarea>
+  </label>
+
+  <button type="submit">Save changes</button>
+</form>
+
+<br />
+
+<div class="div-reviews">
+  {{#each reviews}}
+    <h2 class="specific-reviewer">Reviewer: {{this.reviewer.username}}</h2>
+    <p class="specific-review-rating">Rating: {{this.rating}}</p>
+    <p class="specific-review-review">Review: {{this.review}}</p>
+    <!-- Deleting the Review -->
+    <form action="/review/{{this._id}}/delete" method="post">
+      <button type="submit">Delete</button>
+    </form>
+  {{/each}}
+</div>
+
+
+
+

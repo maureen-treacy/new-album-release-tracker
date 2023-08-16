@@ -1,20 +1,37 @@
+<!-- Navigation Bars -->
+<div class="my-navbar">
+  <a href="/saved-albums">My Saved Albums</a>
+  <a href="/all-new-releases">Return to All Albums</a>
+  <a href="/auth/logout">Logout</a>
+</div>
 
-    <div class="div-albums">
-        {{#each savedAlbums}}
-      <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
+
+<div class="container-2">
+<div class="row">
+  {{#each savedAlbums}}
+
+   
+
+    <div class="col-3 mb-4">  
+    <div class="card pt-4 mb-4" style="width: 18rem;">
+
       <img class="specific-album-img" src={{this.images}} />
-      <a class="specific-album-button" href="/album-details/{{_id}}">View Details</a>
+      <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
 
-        <form action="/album-details/remove-album/{{this._id}}" method="post">
-            <button type="submit">Remove Album</button>
-        </form>
+    <form action="/album-details/{{this._id}}" method="get">
+      <button type="submit">View Details</button>
+    </form>
 
+     <form action="/review-album/{{this._id}}" method="post">
+           <button type="submit">Review Album</button>
+      </form>
 
-        <form action="/review-album/{{this._id}}" method="post">
-            <button type="submit">Review Album</button>
-        </form>
-
-      {{/each}}
-    </div>
-
-    <a href="/all-new-releases">Return to All Albums</a>
+      <form action="/album-details/remove-album/{{this._id}}" method="post">
+        <button type="submit">Remove Album</button>
+      </form>
+  </div>
+  
+</div>
+{{/each}}
+</div>
+</div>

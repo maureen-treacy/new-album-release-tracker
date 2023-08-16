@@ -1,5 +1,23 @@
 body {
   margin: 0;
+  /* width: 100vw;
+  min-width: 100vw; */
+  height: 100%;
+}
+
+.my-navbar {
+  background-color: #333; /* Set the background color */
+  color: white; /* Set the text color */
+  display: flex; /* Display items in a row */
+  justify-content: space-around; /* Space items evenly along the row */
+  align-items: center; /* Center items vertically */
+  padding: 10px 20px; /* Add padding around the navbar */
+  text-decoration: none; /* Removing underline */
+}
+
+.my-navbar a {
+  text-decoration: none;
+  color: white;
 }
 
 .div-welcome {
@@ -17,7 +35,6 @@ body {
   color: white;
 }
 
-
 .div-sign {
   min-height: 100vh;
   display: flex;
@@ -32,7 +49,6 @@ body {
   height: 100vh;
   color: white;
 }
-
 
 .div-login {
   min-height: 100vh;
@@ -51,32 +67,52 @@ body {
 
 
 
-/* .div-search-artists input button {
+.container-1 {
+  background-color: #333;
+  background-size: cover; 
+
+  background-repeat: repeat; 
+  background-image: url("/images/new-albums.jpeg");
+  /* width: 100vw; /* You might want to adjust the width of the container */
+  height: 100%; /* You might want to adjust the height of the container */
+  min-width: 100vw; 
+  object-fit: cover;
+  overflow: scroll;
+}
+
+
+
+
+
+.container-2 {
+  background-color: #333;
+  background-size: cover;
+  background-image: url("/images/new_release.jpeg");
+  overflow: scroll;
+}
+
+
+
+.all-albums-background {
+  min-height: 100vh;
+  display: flex;
+  font-size: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* This elemente added in order to center the h1*/
+  background-image: url("/new_release.jepg");
+  background-size: cover;
+  background-repeat: none;
+  height: 100vh;
+  color: white;
+}
+
+.div-auth a {
   padding: 0.5rem 2rem;
-  background-color: rgb(251, 251, 251);
+  background-color: white;
   border: none;
   cursor: pointer;
-  color: white;
-} */
-
-.div-auth {
-    padding: 0.5rem 2rem;
-    background-color: white;
-    border: none;
-    cursor: pointer;
-    color: purple;      /* Setting the text color to purple */
-    text-decoration: none; /* Removing underline */
-  }
-
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: white; /* Setting the text color to purple */
+  text-decoration: none; /* Removing underline */
 }
-
-a {
-  color: #00b7ff;
-}
-
-h1 {
-  color: 15px;
-} */

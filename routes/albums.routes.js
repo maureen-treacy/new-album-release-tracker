@@ -78,7 +78,7 @@ router.get("/all-new-releases", isLoggedIn, async (req, res, next) => {
 
 //Get Album Details --> refer to movies example
 
-router.get("/album-details/:id", async (req, res, next) => {
+router.get("/album-details/:id", isLoggedIn, async (req, res, next) => {
   const { id } = req.params;
   //   const currentUser = req.session.currentUser;
   //   let isSaved;
@@ -127,7 +127,6 @@ router.post(
 
 //Remove album from saved albums --> is this considered the delete in CRUD?
 
-//NEED TO REVIEW WHAT IS WRONG WHEN REMOVING IDS
 router.post(
   "/album-details/remove-album/:id",
   isLoggedIn,
