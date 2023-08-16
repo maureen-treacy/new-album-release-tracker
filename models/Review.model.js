@@ -4,9 +4,9 @@ const reviewSchema = new Schema({
     rating: Number,
     review: String,
     shareWith: String,
-    saveAlbum: {
-        type: Boolean,
-        required: false
+    reviewer: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }
     })
 

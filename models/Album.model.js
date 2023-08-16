@@ -8,7 +8,15 @@ const albumSchema = new Schema({
   totalTracks: Number,
   spotifyId: String,
   images: String,
-});
+  reviews: [{
+    type: Schema.Types.ObjectId,
+    ref: "Review"
+  }]
+},
+{
+timestamps: true
+}
+);
 
 const Album = model("Album", albumSchema);
 

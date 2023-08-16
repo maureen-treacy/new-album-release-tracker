@@ -23,6 +23,10 @@ const userSchema = new Schema(
     savedAlbums: [{
       type: Schema.Types.ObjectId,
       ref: "Album"
+    }],
+    reviews: [{
+      type: Schema.Types.ObjectId,
+      ref: "Review"
     }]
   },
   {

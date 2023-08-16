@@ -23,13 +23,14 @@ spotifyApi
 
 const Album = require("../models/Album.model.js");
 const User = require("../models/User.model.js");
+const Review = require("../models/Review.model.js");
 // const Review = require("../models/Review.model.js")
 
 //Routes
 
 //Get New Releases, save them to the database and display them
 
-router.get("/all-new-releases", async (req, res) => {
+router.get("/all-new-releases", isLoggedIn, async (req, res, next) => {
   try {
     let allNewReleases = await spotifyApi.getNewReleases({
       limit: 50,
@@ -82,7 +83,14 @@ router.get("/album-details/:id", async (req, res, next) => {
   //   const currentUser = req.session.currentUser;
   //   let isSaved;
   try {
-    let albumDetails = await Album.findById(id);
+    let albumDetails = await Album.findById(id).populate("reviews");
+    await albumDetails.populate({
+      path: "reviews",
+      populate: {
+        path: "reviewer",
+        model: "User",
+      },
+    });
     console.log(albumDetails);
 
     // const thisUser = await User.findById(currentUser._id);
@@ -90,31 +98,34 @@ router.get("/album-details/:id", async (req, res, next) => {
     //   isSaved = true;
     // }
 
-    res.render("albums/album-details", { details: albumDetails });
+    res.render("albums/album-details", albumDetails);
   } catch (error) {
     console.log("Error while fetching album details:", error);
   }
 });
 
 //Add my Saved Albums
-//Note: the savedAlbums after $push comes from the object defined in the User model 
+//Note: the savedAlbums after $push comes from the object defined in the User model
 
-router.post("/album-details/save-album/:id", isLoggedIn, async (req, res, next) => {
-  const { id } = req.params;
-  const currentUser = req.session.currentUser._id;
-  try {
-    const saveAlbum = await User.findByIdAndUpdate(currentUser, {
-      $push: { savedAlbums: id },
-    });
+router.post(
+  "/album-details/save-album/:id",
+  isLoggedIn,
+  async (req, res, next) => {
+    const { id } = req.params;
+    const currentUser = req.session.currentUser._id;
+    try {
+      const saveAlbum = await User.findByIdAndUpdate(currentUser, {
+        $push: { savedAlbums: id },
+      });
 
-    res.redirect(`/all-new-releases`);
-  } catch (error) {
-    console.log("Error while saving album to favorites:", error);
+      res.redirect(`/all-new-releases`);
+    } catch (error) {
+      console.log("Error while saving album to favorites:", error);
+    }
   }
-});
+);
 
 //Remove album from saved albums --> is this considered the delete in CRUD?
-
 
 //NEED TO REVIEW WHAT IS WRONG WHEN REMOVING IDS
 router.post(
@@ -128,7 +139,7 @@ router.post(
         $pull: { savedAlbums: id },
       });
 
-      res.redirect(`/album-details/${id}`);
+      res.redirect(`/saved-albums`);
     } catch (error) {
       console.log("Error while removing album from favorites:", error);
     }
@@ -142,7 +153,7 @@ router.get("/saved-albums", isLoggedIn, async (req, res, next) => {
     const currentUser = req.session.currentUser._id;
 
     const user = await User.findById(currentUser).populate("savedAlbums");
-    console.log(user)
+    console.log(user);
 
     res.render("albums/my-saved-albums", user);
   } catch (error) {
@@ -150,6 +161,59 @@ router.get("/saved-albums", isLoggedIn, async (req, res, next) => {
   }
 });
 
+//Add Review to Album - CRUD Update
 
+//Post route to create review
+router.post("/review-album/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    const currentUser = req.session.currentUser;
+    const { id } = req.params;
+    const { rating, review } = req.body;
+
+    const newReview = await Review.create({ rating, review });
+
+    const albumUpdate = await Album.findByIdAndUpdate(id, {
+      $push: { reviews: newReview._id },
+    });
+
+    const userUpdate = await User.findByIdAndUpdate(currentUser._id, {
+      $push: { reviews: newReview._id },
+    });
+
+    const reviewUser = await Review.findByIdAndUpdate(newReview._id, {
+      $push: { reviewer: currentUser._id },
+    });
+
+    res.redirect(`/album-details/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Edit Review
+
+//Delete review - CRUD delete
+
+router.post("/review/:reviewId/delete", isLoggedIn, async (req, res) => {
+  try {
+    const { reviewId } = req.params;
+    const user = req.session.currentUser;
+
+    await Review.findByIdAndRemove(reviewId);
+    console.log(Review);
+
+    /*  await Album.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    console.log(Album); */
+
+    await User.findByIdAndUpdate(user._id, {
+      $pull: { reviews: reviewId },
+    });
+    console.log(User);
+
+    res.redirect("/all-new-releases");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;
