@@ -1,3 +1,5 @@
+{{!-- 
+
 <html lang="en">
 
   <head>
@@ -6,13 +8,85 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>FEATURED</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+
+<!-- Adding links inside head-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+   
+
   </head>
 
   <body>
 
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+  <!-- Navbar content -->
+</nav>
+
+<nav class="navbar bg-primary" data-bs-theme="dark">
+  <!-- Navbar content -->
+</nav>
+
+<nav class="navbar" style="background-color: #e3f2fd;">
+  <!-- Navbar content -->
+</nav>
+
+
     {{{body}}}
 
     <script src="/js/script.js"></script>
+    
+   <!-- right before closing body--> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> 
+  </body>
+
+</html> --}}
+
+<!-- NEW HERE -->
+
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>FEATURED</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
+    <!-- Bootstrap Stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+
+    <!-- Navigation Bars -->
+    {{! <div class="navbar"> }}
+    {{! <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark"> }}
+    {{! <nav class="navbar"> }}
+    {{! <a href="/saved-albums">My Saved Albums</a> 
+   <a href="/all-new-releases">Return to All Albums</a>
+  </nav>
+  </div> }}
+
+    <!-- Content Placeholder -->
+    {{{body}}}
+
+    <!-- Custom JavaScript -->
+    <script src="/js/script.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+
   </body>
 
 </html>
