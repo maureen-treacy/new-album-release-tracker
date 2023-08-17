@@ -39,6 +39,10 @@ router.get("/all-new-releases", isLoggedIn, async (req, res, next) => {
     });
     /* console.log(allNewReleases.body.albums.items); */
 
+    //These next two sections of code pull in the database and match it to the fields that we're creating in Mongo DB based on our Models
+    
+    //the variable names here must mattch the fields from the API documentation
+
     allNewReleases.body.albums.items.forEach(async (album) => {
       const existingAlbum = await Album.findOne({ spotifyId: album.id });
       if (!existingAlbum) {
@@ -53,7 +57,8 @@ router.get("/all-new-releases", isLoggedIn, async (req, res, next) => {
         } = album;
         let imageUrl = images[0].url;
 
-  
+  // The key names here must match the key names from the Album.Model file. The value names must match the fields from the API documentation
+
         await Album.create({
           albumTitle: name,
           artists: artists[0].name,
@@ -197,7 +202,7 @@ router.post("/review/:reviewId/edit", isLoggedIn, async (req, res, next) => {
         const { reviewId } = req.params;
         const {rating, review} = req.body
 
-        await Review.findById(reviewId, {rating, review})
+        await Review.findByIdAndUpdate(reviewId, {rating, review}, {new: true})
         res.redirect("/saved-albums")
     }
     catch (error){
