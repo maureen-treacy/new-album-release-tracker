@@ -215,6 +215,7 @@ router.post("/review/:reviewId/edit", isLoggedIn, async (req, res, next) => {
         const {rating, review} = req.body
 
         // Without using new:true, the method would return the original document before the update and we would not see the changes reflected immediately after the update 
+
         await Review.findByIdAndUpdate(reviewId, {rating, review}, {new: true})
         res.redirect("/saved-albums")
     }

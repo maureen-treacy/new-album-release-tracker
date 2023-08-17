@@ -24,11 +24,16 @@
         <div class="card mx-auto mb-2 mt-4" style="width: 18rem;">
 
           <img src={{this.images}} class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">{{this.albumTitle}}</h5>
+          <div class="card-body d-flex flex-column justify-content-between align-items-center">
+            <h5 class="card-title">Artist: {{this.artists}}</h5>
             <p class="card-text"></p>
-            <a href="/album-details/{{_id}}" class="btn btn-primary">Check
+            <a href="/album-details/{{_id}}" class="btn btn-dark">Check
               Details</a>
+
+
+                <form action="/album-details/save-album/{{_id}}" method="post">
+                        <button type="submit" class="btn btn-dark mt-2">Save Album</button>
+                    </form>
           </div>
         </div>
       </div>
@@ -36,7 +41,3 @@
   </div>
 </div>
 
-{{! </div> }}
-
-{{!-- 
-    {{this.images.0.url}}  --}}
