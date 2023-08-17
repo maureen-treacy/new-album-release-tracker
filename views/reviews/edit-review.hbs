@@ -1,0 +1,19 @@
+<h2> Edit this Review:</h2>
+
+<form action="/review/{{review._id}}/edit" method="post">
+  <label>
+    Rate:
+    <input type="number" name="rating" min="1" max="10" value="{{review.rating}}"/>
+  </label>
+
+  <label>
+    Review:
+    <textarea name="review" cols="30" rows="4">{{review.review}}</textarea>
+  </label>
+
+  <button type="submit">Save changes</button>
+</form>
+
+{{!-- Need to Fix --}}
+ {{!-- <a href="/album-details/{{review._id}}">Return to Reviews</a> --}}
+

@@ -49,16 +49,14 @@ router.get("/all-new-releases", isLoggedIn, async (req, res, next) => {
           genres,
           total_tracks,
           id,
-          images, //does this need to be in its own variable like the example?
+          images, 
         } = album;
         let imageUrl = images[0].url;
 
-        //use album here?
+  
         await Album.create({
           albumTitle: name,
           artists: artists[0].name,
-          //do we need to include all the fields?
-          //how does this need to be displayed int he model file?
           releaseDate: release_date,
           genres,
           totalTracks: total_tracks,
@@ -80,8 +78,6 @@ router.get("/all-new-releases", isLoggedIn, async (req, res, next) => {
 
 router.get("/album-details/:id", isLoggedIn, async (req, res, next) => {
   const { id } = req.params;
-  //   const currentUser = req.session.currentUser;
-  //   let isSaved;
   try {
     let albumDetails = await Album.findById(id).populate("reviews");
     await albumDetails.populate({
@@ -93,11 +89,6 @@ router.get("/album-details/:id", isLoggedIn, async (req, res, next) => {
     });
     console.log(albumDetails);
 
-    // const thisUser = await User.findById(currentUser._id);
-    // if (thisUser.savedAlbums.includes(id)) {
-    //   isSaved = true;
-    // }
-
     res.render("albums/album-details", albumDetails);
   } catch (error) {
     console.log("Error while fetching album details:", error);
@@ -105,7 +96,8 @@ router.get("/album-details/:id", isLoggedIn, async (req, res, next) => {
 });
 
 //Add my Saved Albums
-//Note: the savedAlbums after $push comes from the object defined in the User model
+//Note: the savedAlbums after $addToSet comes from the object defined in the User model
+//Used the $addToSet instead of $push $addToSet checks to see if the ID is already in the array before adding it while push allows for duplicate entries
 
 router.post(
   "/album-details/save-album/:id",
@@ -115,7 +107,7 @@ router.post(
     const currentUser = req.session.currentUser._id;
     try {
       const saveAlbum = await User.findByIdAndUpdate(currentUser, {
-        $push: { savedAlbums: id },
+        $addToSet: { savedAlbums: id },
       });
 
       res.redirect(`/all-new-releases`);
@@ -125,8 +117,7 @@ router.post(
   }
 );
 
-//Remove album from saved albums --> is this considered the delete in CRUD?
-
+//Remove album from saved albums
 router.post(
   "/album-details/remove-album/:id",
   isLoggedIn,
@@ -146,7 +137,6 @@ router.post(
 );
 
 //Display Saved Albums
-
 router.get("/saved-albums", isLoggedIn, async (req, res, next) => {
   try {
     const currentUser = req.session.currentUser._id;
@@ -190,9 +180,35 @@ router.post("/review-album/:id", isLoggedIn, async (req, res, next) => {
 });
 
 // Edit Review
+router.get("/review/:reviewId/edit", isLoggedIn, async (req, res, next) => {
+    try {
+        const { reviewId } = req.params;
+        let foundReview = await Review.findById(reviewId)
+        res.render("reviews/edit-review", {review: foundReview})
+    }
+    catch (error){
+        console.log(error)
+    }
+
+})
+
+router.post("/review/:reviewId/edit", isLoggedIn, async (req, res, next) => {
+    try {
+        const { reviewId } = req.params;
+        const {rating, review} = req.body
+
+        await Review.findById(reviewId, {rating, review})
+        res.redirect("/saved-albums")
+    }
+    catch (error){
+        console.log(error)
+    }
+
+})
+
+
 
 //Delete review - CRUD delete
-
 router.post("/review/:reviewId/delete", isLoggedIn, async (req, res) => {
   try {
     const { reviewId } = req.params;
