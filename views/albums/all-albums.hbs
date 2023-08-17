@@ -1,35 +1,35 @@
-{{! adding below to layout.hbs
- <a href="/saved-albums">My Saved Albums</a> }}
-
-{{!-- <div class="div-albums">
-  {{#each albums}}
-    <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
-    <img class="specific-album-img" src={{this.images}} />
-    <a class="specific-album-button" href="/album-details/{{_id}}">View Details</a>
-  {{/each}}
-</div> --}}
-
-<!-- ADD IMAGE HERE-->
-{{! <div class="all-albums-background">  }}
-
 <!-- Navigation Bars -->
 <div class="my-navbar">
   <a href="/saved-albums">My Saved Albums</a>
   <a href="/all-new-releases">Return to All Albums</a>
   <a href="/auth/logout">Logout</a>
+  <!-- adding dropdown bar -->
+   <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            About the Creators
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="https://www.linkedin.com/in/agnesmora-dev/">Agnes</a></li>
+            <li><a class="dropdown-item" href="https://www.linkedin.com/in/maureen-treacy-30714190/">Maureen</a></li>
+          </ul>
+        </li>
 </div>
 
 <div class="container-1">
-  <div class="row">
+  {{! <div class="row"> }}
+  {{! <div class="row d-flex justify-content-start"> }}
+  <div class="row d-flex justify-content-center">
     {{#each albums}}
-      <div class="col-3"> </div>
-      <div class="card pt-4 mb-4" style="width: 18rem;">
+      <div class="col-3">
+        <div class="card mx-auto mb-2 mt-4" style="width: 18rem;">
 
-        <img src={{this.images}} class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{{this.albumTitle}}</h5>
-          <p class="card-text"></p>
-          <a href="/album-details/{{_id}}" class="btn btn-primary">Check Details</a>
+          <img src={{this.images}} class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{this.albumTitle}}</h5>
+            <p class="card-text"></p>
+            <a href="/album-details/{{_id}}" class="btn btn-primary">Check
+              Details</a>
+          </div>
         </div>
       </div>
     {{/each}}

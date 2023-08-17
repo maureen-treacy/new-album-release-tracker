@@ -1,13 +1,13 @@
 body {
   margin: 0;
+  height: 100%;
   /* width: 100vw;
   min-width: 100vw; */
-  height: 100%;
 }
 
 .my-navbar {
-  background-color: #333; /* Set the background color */
-  color: white; /* Set the text color */
+  background-color: #333;
+  color: white; /* Initial text color */
   display: flex; /* Display items in a row */
   justify-content: space-around; /* Space items evenly along the row */
   align-items: center; /* Center items vertically */
@@ -65,33 +65,51 @@ body {
   color: white;
 }
 
-
-
 .container-1 {
   background-color: #333;
-  background-size: cover; 
-
-  background-repeat: repeat; 
+  background-size: cover;
+  background-repeat: repeat;
   background-image: url("/images/new-albums.jpeg");
-  /* width: 100vw; /* You might want to adjust the width of the container */
-  height: 100%; /* You might want to adjust the height of the container */
-  min-width: 100vw; 
+  height: 100vh;
+  min-width: 100vw;
   object-fit: cover;
   overflow: scroll;
+  /*   padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px; */
+  justify-content: space-evenly;
+  align-items: center;
+  /* display: flex; */
+  /*Tip from Bruno to add display flex (this worked on the 3rd container but here 
+  it splits the top row of cards in in two - implementing margin and padding did not resolve the issue.
+   Commening out for now*/
 }
-
-
-
-
 
 .container-2 {
   background-color: #333;
   background-size: cover;
   background-image: url("/images/new_release.jpeg");
   overflow: scroll;
+  padding-left: 30px;
+  /* padding-right: 30px; */
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  /* display: flex; */
 }
 
-
+.container-3 {
+  background-color: #333;
+  background-size: contain;
+  background-repeat: repeat;
+  background-image: url("/images/saved.alb.jpeg");
+  overflow: scroll;
+  align-items: center;
+  justify-content: space-evenly;
+  display: flex;
+  font-weight: bold;
+}
 
 .all-albums-background {
   min-height: 100vh;
@@ -116,3 +134,24 @@ body {
   color: white; /* Setting the text color to purple */
   text-decoration: none; /* Removing underline */
 }
+
+.my-card {
+  
+  width: 18vw;
+  height: 33vh;
+}
+
+
+/* remove below item dot*/
+.nav-item  {
+  list-style-type: none;
+}
+
+
+/*Addressing the nav-item dropdown or dropdown-menu is not specific enough - what needs to be addressed 
+is the li */
+li {
+  background-color: #333;
+  color: blueviolet;
+}
+

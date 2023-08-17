@@ -1,8 +1,8 @@
 <!-- Navigation Bars -->
 <div class="my-navbar">
-    <a href="/saved-albums">My Saved Albums</a>
-    <a href="/all-new-releases">Return to All Albums</a>
-    <a href="/auth/logout">Logout</a>
+  <a href="/saved-albums">My Saved Albums</a>
+  <a href="/all-new-releases">Return to All Albums</a>
+  <a href="/auth/logout">Logout</a>
 </div>
 
 <div class="div-current-user">
@@ -13,49 +13,51 @@
 
 </div>
 
-<!-- Adding Card -->
-<div class="card" style="width: 18rem;">
-  <img class="specific-album-img" src={{details.images}} />
-  <h2>{{details.albumTitle}}</h2>
-  <p>{{details.artist}}</p>
-  <p>{{details.releaseDate}}</p>
-  <p>{{details.totalTracks}}</p>
+<div class="container-3">
+  <!-- Adding Card -->
+  <div class="col-3">
+    <div class="row d-flex justify-content-start">
+      <div class="card pt-4 mb-4 mt-2 ml-4" style="width: 18rem;">
+        <img class="specific-album-img" src={{images}} />
+        <p>{{albumTitle}}</p>
+        <p>{{artists}}</p>
+        <p>{{releaseDate}}</p>
+        <p>{{totalTracks}}</p>
 
-  <form action="/album-details/save-album/{{details._id}}" method="post">
-    <button type="submit">Save Album</button>
-  </form>
+        <form action="/album-details/save-album/{{_id}}" method="post">
+          <button type="submit" class="btn btn-primary">Save Album</button>
+        </form>
+        <form action="/review-album/{{_id}}" method="post">
+          <label>
+            Rate:
+            <input type="number" name="rating" min="1" max="10" />
+          </label>
+
+          <label>
+            Review:
+            <textarea name="review" cols="30" rows="4"></textarea>
+          </label>
+
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="card" style="width: 18rem;">
+      <div class="div-reviews">
+        {{#each reviews}}
+          <h2 class="specific-reviewer">Reviewer:
+            {{this.reviewer.username}}</h2>
+          <p class="specific-review-rating">Rating: {{this.rating}}</p>
+          <p class="specific-review-review">Review: {{this.review}}</p>
+          <!-- Deleting the Review -->
+          <form action="/review/{{this._id}}/delete" method="post">
+            <button type="submit" class="btn btn-primary">Delete</button>
+          </form>
+        {{/each}}
+      </div>
+    </div>
+  </div>
 </div>
-
-<br />
-
-<form action="/review-album/{{_id}}" method="post">
-  <label>
-    Rate:
-    <input type="number" name="rating" min="1" max="10" />
-  </label>
-
-  <label>
-    Review:
-    <textarea name="review" cols="30" rows="4"></textarea>
-  </label>
-
-  <button type="submit">Save changes</button>
-</form>
-
-<br />
-
-<div class="div-reviews">
-  {{#each reviews}}
-    <h2 class="specific-reviewer">Reviewer: {{this.reviewer.username}}</h2>
-    <p class="specific-review-rating">Rating: {{this.rating}}</p>
-    <p class="specific-review-review">Review: {{this.review}}</p>
-    <!-- Deleting the Review -->
-    <form action="/review/{{this._id}}/delete" method="post">
-      <button type="submit">Delete</button>
-    </form>
-  {{/each}}
-</div>
-
-
-
-

@@ -5,33 +5,31 @@
   <a href="/auth/logout">Logout</a>
 </div>
 
-
 <div class="container-2">
-<div class="row">
-  {{#each savedAlbums}}
+  <div class="row d-flex justify-content-center">
+    {{#each savedAlbums}}
 
-   
+      <div class="col-3 mb-3">
+        <div class="card pt-4 mb-4 mt-4 ml-4" style="width: 18rem;">
 
-    <div class="col-3 mb-4">  
-    <div class="card pt-4 mb-4" style="width: 18rem;">
+          <img class="specific-album-img" src={{this.images}} />
+          <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
 
-      <img class="specific-album-img" src={{this.images}} />
-      <h1 class="specific-album-heading">{{this.albumTitle}}</h1>
+          <form action="/album-details/{{this._id}}" method="get">
+            {{! <button type="submit ">View Details</button> }}
+            <button type="submit" class="btn btn-primary">View Details</button>
+          </form>
 
-    <form action="/album-details/{{this._id}}" method="get">
-      <button type="submit">View Details</button>
-    </form>
+          {{!-- <form action="/review-album/{{this._id}}" method="post">
+           <button type="submit"  class="btn btn-primary">Review Album</button>
+      </form> --}}
 
-     <form action="/review-album/{{this._id}}" method="post">
-           <button type="submit">Review Album</button>
-      </form>
+          <form action="/album-details/remove-album/{{this._id}}" method="post">
+            <button type="submit" class="btn btn-primary">Remove Album</button>
+          </form>
+        </div>
 
-      <form action="/album-details/remove-album/{{this._id}}" method="post">
-        <button type="submit">Remove Album</button>
-      </form>
+      </div>
+    {{/each}}
   </div>
-  
-</div>
-{{/each}}
-</div>
 </div>
