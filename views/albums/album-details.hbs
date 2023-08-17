@@ -63,6 +63,7 @@
 
           <!-- Deleting the Review -->
           <form action="/review/{{this._id}}/delete" method="post">
+           <input type="hidden" name="albumId" value="{{album._id}}">
             <button type="submit" class="btn btn-primary">Delete</button>
           </form>
 

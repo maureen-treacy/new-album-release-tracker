@@ -40,7 +40,7 @@ router.get("/all-new-releases", isLoggedIn, async (req, res, next) => {
     /* console.log(allNewReleases.body.albums.items); */
 
     //These next two sections of code pull in the database and match it to the fields that we're creating in Mongo DB based on our Models
-    
+
     //the variable names here must mattch the fields from the API documentation
 
     allNewReleases.body.albums.items.forEach(async (album) => {
@@ -71,20 +71,25 @@ router.get("/all-new-releases", isLoggedIn, async (req, res, next) => {
       }
     });
 
+    //finding all albums that are in MongoDB
+
     const databaseAlbums = await Album.find();
-    res.render("albums/all-albums", { albums: databaseAlbums });
+    res.render("albums/all-albums", { albums: databaseAlbums }); // databaseAlbums is an array and we need to pass it as an object to make it accessible in handlebars file
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
   }
 });
 
-//Get Album Details --> refer to movies example
+//Get Album Details --> refer to movies labs
 
 router.get("/album-details/:id", isLoggedIn, async (req, res, next) => {
   const { id } = req.params;
   try {
-    let albumDetails = await Album.findById(id).populate("reviews");
+    let albumDetails = await Album.findById(id).populate("reviews");   //.populate("reviews") is used in mongoose to populate the reviews for the associated album that we are referencing with ID. Without .populate("reviews") we would only get the IDs for each review and not the actual review objects. 
+  
+
+    //this nested .populate is called to further populate the reviewer field with user details from the User model, allowing us to access information about the User who left the reivew
     await albumDetails.populate({
       path: "reviews",
       populate: {
@@ -101,8 +106,10 @@ router.get("/album-details/:id", isLoggedIn, async (req, res, next) => {
 });
 
 //Add my Saved Albums
-//Note: the savedAlbums after $addToSet comes from the object defined in the User model
-//Used the $addToSet instead of $push $addToSet checks to see if the ID is already in the array before adding it while push allows for duplicate entries
+
+//The savedAlbums after $addToSet comes from the object defined in the User model
+
+//Used the $addToSet instead of $push because $addToSet checks to see if the ID is already in the array before adding it while push allows for duplicate entries
 
 router.post(
   "/album-details/save-album/:id",
@@ -155,9 +162,8 @@ router.get("/saved-albums", isLoggedIn, async (req, res, next) => {
   }
 });
 
-//Add Review to Album - CRUD Update
+//Add Review to Album - CRUD Update. Post route creates review
 
-//Post route to create review
 router.post("/review-album/:id", isLoggedIn, async (req, res, next) => {
   try {
     const currentUser = req.session.currentUser;
@@ -166,13 +172,19 @@ router.post("/review-album/:id", isLoggedIn, async (req, res, next) => {
 
     const newReview = await Review.create({ rating, review });
 
+    //This allows us to tie a review to a certain album, so that when we go to the albums details page, we will see all reviews for this album
+
     const albumUpdate = await Album.findByIdAndUpdate(id, {
       $push: { reviews: newReview._id },
     });
 
+    //This allows us to add a review to a specific user
+
     const userUpdate = await User.findByIdAndUpdate(currentUser._id, {
       $push: { reviews: newReview._id },
     });
+
+    //this is used to update the reviewer field in the on the newly created review with the current user. It establishes a link between the review and the user who submitted it 
 
     const reviewUser = await Review.findByIdAndUpdate(newReview._id, {
       $push: { reviewer: currentUser._id },
@@ -202,6 +214,7 @@ router.post("/review/:reviewId/edit", isLoggedIn, async (req, res, next) => {
         const { reviewId } = req.params;
         const {rating, review} = req.body
 
+        // Without using new:true, the method would return the original document before the update and we would not see the changes reflected immediately after the update 
         await Review.findByIdAndUpdate(reviewId, {rating, review}, {new: true})
         res.redirect("/saved-albums")
     }
@@ -217,13 +230,18 @@ router.post("/review/:reviewId/edit", isLoggedIn, async (req, res, next) => {
 router.post("/review/:reviewId/delete", isLoggedIn, async (req, res) => {
   try {
     const { reviewId } = req.params;
+    const { albumId } = req.body
     const user = req.session.currentUser;
+
+    //removes the review from the Review model
 
     await Review.findByIdAndRemove(reviewId);
     console.log(Review);
 
-    /*  await Album.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    console.log(Album); */
+    await Album.findByIdAndUpdate(albumId, { $pull: { reviews: reviewId } });
+    console.log(Album);
+    
+    //Removes the review from the user
 
     await User.findByIdAndUpdate(user._id, {
       $pull: { reviews: reviewId },
