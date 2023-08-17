@@ -52,10 +52,20 @@
             {{this.reviewer.username}}</h2>
           <p class="specific-review-rating">Rating: {{this.rating}}</p>
           <p class="specific-review-review">Review: {{this.review}}</p>
+
+          <!-- adding an edit feature -->
+          {{!-- <a href="/review/{{this._id}}/edit"> Edit Review</a> --}}
+          {{! <button type="submit">Save changes</button> }}
+
+          <form action="/review/{{this._id}}/edit" method="get">
+            <button type="submit" class="btn btn-primary">Edit Review</button>
+          </form>
+
           <!-- Deleting the Review -->
           <form action="/review/{{this._id}}/delete" method="post">
             <button type="submit" class="btn btn-primary">Delete</button>
           </form>
+
         {{/each}}
       </div>
     </div>
