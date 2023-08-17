@@ -1,74 +1,73 @@
-<!-- Navigation Bars -->
-<div class="my-navbar">
-  <a href="/saved-albums">My Saved Albums</a>
-  <a href="/all-new-releases">Return to All Albums</a>
-  <a href="/auth/logout">Logout</a>
-</div>
 
-<div class="div-current-user">
-
-  {{#each currentUser}}
-    <p>Hello, {{username}}! Welcome back.</p>
-  {{/each}}
-
-</div>
-
-<div class="container-3">
-  <!-- Adding Card -->
-  <div class="col-3">
-    <div class="row d-flex justify-content-start">
-      <div class="card pt-4 mb-4 mt-2 ml-4" style="width: 18rem;">
-        <img class="specific-album-img" src={{images}} />
-        <p>Album Title: {{albumTitle}}</p>
-        <p>Artist: {{artists}}</p>
-        <p>Release Date: {{releaseDate}}</p>
-        <p>Total Number of Tracks: {{totalTracks}}</p>
-
-        <form action="/album-details/save-album/{{_id}}" method="post">
-          <button type="submit" class="btn btn-primary">Save Album</button>
-        </form>
-        <form action="/review-album/{{_id}}" method="post">
-          <label>
-            Rate:
-            <input type="number" name="rating" min="1" max="10" />
-          </label>
-
-          <label>
-            Review:
-            <textarea name="review" cols="30" rows="4"></textarea>
-          </label>
-
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </form>
-      </div>
+<body class="review">
+    <div class="my-navbar">
+        <a href="/saved-albums">My Saved Albums</a>
+        <a href="/all-new-releases">Return to All Albums</a>
+        <a href="/auth/logout">Logout</a>
     </div>
 
-    <br />
+    <div class="container text-center">
+        <div class="div-current-user">
+            {{#each currentUser}}
+                <p>Hello, {{username}}! Welcome back.</p>
+            {{/each}}
+        </div>
 
-    <div class="card" style="width: 18rem;">
-      <div class="div-reviews">
-        {{#each reviews}}
-          <h2 class="specific-reviewer">Reviewer:
-            {{this.reviewer.username}}</h2>
-          <p class="specific-review-rating">Rating: {{this.rating}}</p>
-          <p class="specific-review-review">Review: {{this.review}}</p>
+        <div class="row justify-content-center">
+            <!-- Album Details and Review Submission Form -->
+            <div class="col-md-6 mb-4">
+                <div class="card pt-4">
+                    <img class="specific-album-img" src={{images}} />
+                    <p>Album Title: {{albumTitle}}</p>
+                    <p>Artist: {{artists}}</p>
+                    <p>Release Date: {{releaseDate}}</p>
+                    <p>Total Number of Tracks: {{totalTracks}}</p>
 
-          <!-- adding an edit feature -->
-          {{!-- <a href="/review/{{this._id}}/edit"> Edit Review</a> --}}
-          {{! <button type="submit">Save changes</button> }}
+                    <form action="/album-details/save-album/{{_id}}" method="post">
+                        <button type="submit" class="btn btn-primary">Save Album</button>
+                    </form>
 
-          <form action="/review/{{this._id}}/edit" method="get">
-            <button type="submit" class="btn btn-primary">Edit Review</button>
-          </form>
+                    <form action="/review-album/{{_id}}" method="post">
+                        <div class="form-group">
+                            <label for="rating">Rate:</label>
+                            <input type="number" class="form-control" id="rating" name="rating" min="1" max="10">
+                        </div>
 
-          <!-- Deleting the Review -->
-          <form action="/review/{{this._id}}/delete" method="post">
-           <input type="hidden" name="albumId" value="{{album._id}}">
-            <button type="submit" class="btn btn-primary">Delete</button>
-          </form>
+                        <div class="form-group">
+                            <label for="review">Review:</label>
+                            <textarea class="form-control" id="review" name="review" rows="4"></textarea>
+                        </div>
 
-        {{/each}}
-      </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews in Rows of Two -->
+        <div class="row justify-content-center">
+            {{#each reviews}}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="specific-reviewer">Reviewer: {{this.reviewer.username}}</h2>
+                            <p class="specific-review-rating">Rating: {{this.rating}}</p>
+                            <p class="specific-review-review">Review: {{this.review}}</p>
+
+                            <form action="/review/{{this._id}}/edit" method="get">
+                                <button type="submit" class="btn btn-primary">Edit Review</button>
+                            </form>
+
+                            <form action="/review/{{this._id}}/delete" method="post">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
     </div>
-  </div>
-</div>
+
+
+</body>
+

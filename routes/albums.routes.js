@@ -238,8 +238,8 @@ router.post("/review/:reviewId/delete", isLoggedIn, async (req, res) => {
     await Review.findByIdAndRemove(reviewId);
     console.log(Review);
 
-    await Album.findByIdAndUpdate(albumId, { $pull: { reviews: reviewId } });
-    console.log(Album);
+    // await Album.findByIdAndUpdate(albumId, { $pull: { reviews: reviewId } });
+    // console.log(Album);
     
     //Removes the review from the user
 

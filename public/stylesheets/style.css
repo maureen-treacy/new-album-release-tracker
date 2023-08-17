@@ -5,6 +5,10 @@ body {
   min-width: 100vw; */
 }
 
+.review {
+  background-repeat: repeat;
+  background-image: url("/images/saved.alb.jpeg");
+}
 .my-navbar {
   background-color: #333;
   color: white; /* Initial text color */
