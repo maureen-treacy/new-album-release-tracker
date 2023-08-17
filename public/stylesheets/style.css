@@ -109,6 +109,7 @@ body {
   justify-content: space-evenly;
   display: flex;
   font-weight: bold;
+  width: 100vw;
 }
 
 .all-albums-background {

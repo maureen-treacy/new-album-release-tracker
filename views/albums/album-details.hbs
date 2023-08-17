@@ -19,10 +19,10 @@
     <div class="row d-flex justify-content-start">
       <div class="card pt-4 mb-4 mt-2 ml-4" style="width: 18rem;">
         <img class="specific-album-img" src={{images}} />
-        <p>{{albumTitle}}</p>
-        <p>{{artists}}</p>
-        <p>{{releaseDate}}</p>
-        <p>{{totalTracks}}</p>
+        <p>Album Title: {{albumTitle}}</p>
+        <p>Artist: {{artists}}</p>
+        <p>Release Date: {{releaseDate}}</p>
+        <p>Total Number of Tracks: {{totalTracks}}</p>
 
         <form action="/album-details/save-album/{{_id}}" method="post">
           <button type="submit" class="btn btn-primary">Save Album</button>

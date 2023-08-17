@@ -1,19 +1,34 @@
-<h2> Edit this Review:</h2>
+<div class="container-3">
+  <div class="col-3">
+    <div class="row d-flex justify-content-start">
+      <div class="card pt-4 mb-4 mt-2 ml-4" style="width: 18rem;">
+        <h2> Edit this Review:</h2>
 
-<form action="/review/{{review._id}}/edit" method="post">
-  <label>
-    Rate:
-    <input type="number" name="rating" min="1" max="10" value="{{review.rating}}"/>
-  </label>
+        <form action="/review/{{review._id}}/edit" method="post">
+          <label>
+            Rate:
+            <input
+              type="number"
+              name="rating"
+              min="1"
+              max="10"
+              value="{{review.rating}}"
+            />
+          </label>
 
-  <label>
-    Review:
-    <textarea name="review" cols="30" rows="4">{{review.review}}</textarea>
-  </label>
+          <label>
+            Review:
+            <textarea
+              name="review"
+              cols="30"
+              rows="4"
+            >{{review.review}}</textarea>
+          </label>
 
-  <button type="submit">Save changes</button>
-</form>
+          <button type="submit">Save changes</button>
+        </form>
 
-{{!-- Need to Fix --}}
- {{!-- <a href="/album-details/{{review._id}}">Return to Reviews</a> --}}
-
+      </div>
+    </div>
+  </div>
+</div>
